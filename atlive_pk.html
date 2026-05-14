@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>AT LIVE - FINAL VIP PK PANEL</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; }
+        
+        /* 🌌 EYE-FRIENDLY LUXURY PEACH & SALMON PASTEL CANVAS 🌌 */
+        body { 
+            background: radial-gradient(circle at top, #ffdcd2 0%, #ffd0cb 35%, #fff0f3 100%);
+            background-color: #fff0f3;
+            color: #2c3e50; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            min-height: 100vh; 
+            padding: 8px; 
+            overflow-x: hidden;
+        }
+
+        /* Fixed Mobile Screen Container Box */
+        .phone-container { width: 100%; max-width: 420px; display: flex; flex-direction: column; align-items: center; }
+        
+        /* Premium Soft Rose Gold Title Header Frame */
+        .app-header { width: 100%; background: #ffffff; border-radius: 12px; padding: 2px; text-align: center; position: relative; overflow: hidden; box-shadow: 0 4px 15px rgba(255, 102, 170, 0.1); margin-bottom: 8px; }
+        .app-header::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: conic-gradient(#ff80aa, #ffaa66, #ff4d79, #ff80aa); animation: headerRotate 12s linear infinite; z-index: 1; }
+        .header-content { position: relative; z-index: 2; background: linear-gradient(90deg, #fff5f7 0%, #ffe6eb 50%, #ffd0da 100%); padding: 8px; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.7); }
+        .app-title { font-size: 19px; font-weight: 900; background: linear-gradient(45deg, #cc0044, #ff0055, #e65c00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 1px; filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.1)); }
+        .live-clock-wrapper { margin-top: 2px; font-size: 11px; color: #cc0044; font-weight: bold; letter-spacing: 0.5px; }
+
+        /* Slow Stable Message Banner Ticker */
+        .ticker-container { width: 100%; background: linear-gradient(90deg, #fff0f3 0%, #ffdee4 50%, #ffcbd5 100%); border: 1px solid rgba(255, 0, 85, 0.15); padding: 5px 0; border-radius: 8px; margin-bottom: 8px; overflow: hidden; white-space: nowrap; box-shadow: 0 4px 12px rgba(255, 0, 85, 0.04); }
+        .ticker-text { display: inline-block; padding-left: 100%; animation: textDrift 110s linear infinite; font-size: 11px; font-weight: 700; color: #cc0044; }
+
+        /* 4-Tab Slide Navigation Menu Control */
+        .tab-menu { display: flex; gap: 4px; width: 100%; margin-bottom: 10px; background: linear-gradient(135deg, #fff0f4 0%, #ffe1e6 100%); padding: 4px; border-radius: 12px; border: 1px solid rgba(255, 102, 170, 0.25); z-index: 20; box-shadow: 0 4px 15px rgba(255, 102, 170, 0.08); }
+        .tab-btn { flex: 1; padding: 8px 1px; font-size: 10px; font-weight: bold; background: transparent; border: none; color: #826e79; border-radius: 8px; cursor: pointer; text-transform: uppercase; transition: all 0.2s; white-space: nowrap; }
+        .tab-btn:hover { color: #ff0055; }
+        .tab-btn.active { background: linear-gradient(135deg, #ff80aa, #ff4d79); color: #fff; box-shadow: 0 4px 10px rgba(255, 77, 121, 0.3); text-shadow: 0 1px 2px rgba(0,0,0,0.2); }
+        
+        /* FIXED-HEIGHT VERTICAL SCROLLABLE SCREEN AREAS */
+        .content-section { width: 100%; display: none; border-radius: 14px; padding: 6px; border: 1px solid rgba(255, 255, 255, 0.6); height: calc(100vh - 140px); overflow-y: auto; -webkit-overflow-scrolling: touch; }
+        .content-section::-webkit-scrollbar { width: 4px; }
+        .content-section::-webkit-scrollbar-thumb { background: #ff80aa; border-radius: 10px; }
+        
+        #live-schedule { background: radial-gradient(circle at center, rgba(255, 128, 170, 0.08) 0%, rgba(255, 255, 255, 0.3) 100%); }
+        #match-history { background: radial-gradient(circle at center, rgba(255, 0, 85, 0.06) 0%, rgba(255, 255, 255, 0.3) 100%); }
+        #win-bonus { background: radial-gradient(circle at center, rgba(255, 170, 102, 0.1) 0%, rgba(255, 255, 255, 0.3) 100%); }
+        #next-events-panel { background: radial-gradient(circle at center, rgba(0, 179, 119, 0.05) 0%, rgba(255, 255, 255, 0.3) 100%); }
+
+        /* 🔳 HIGH-DENSITY COMPACT CARDS SHOWING 5-6 ENTRIES AT ONCE 🔳 */
+        .pk-card { background: rgba(255, 242, 245, 0.9); border-radius: 12px; border: 1px solid rgba(255,255,255,0.85); margin-bottom: 6px; padding: 6px 10px; box-shadow: 0 4px 10px rgba(31, 41, 55, 0.02); position: relative; overflow: hidden; }
+        .pk-card::after { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: linear-gradient(#ff80aa, #ff4d79); }
+        .card-meta { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0,0,0,0.03); padding-bottom: 3px; margin-bottom: 5px; font-size: 9px; color: #7f8c8d; }
+        .match-id { color: #d35400; font-weight: bold; background: rgba(211,84,0,0.05); padding: 1px 4px; border-radius: 4px; }
+        .brand-watermark { color: #ff4d79; font-weight: bold; opacity: 0.4; }
+
+        .pk-match-area { display: flex; align-items: center; justify-content: space-around; }
+        .player-wrapper { width: 35%; display: flex; flex-direction: column; align-items: center; text-align: center; position: relative; }
+        
+        /* High-Contrast Brand Frame System */
+        .profile-slot { width: 44px; height: 44px; border-radius: 10px; background: #ffd9e5; border: 2px solid #ff80aa; margin-bottom: 2px; display: flex; justify-content: center; align-items: center; position: relative; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); overflow: hidden; }
+        .p2-frame { border-color: #ff4d79; background: #ffcbd8; }
+        .win-frame { border-color: #e67e22; background: #ffe9db; }
+        
+        .profile-slot::before { content: 'AT'; font-size: 11px; font-weight: 900; color: #80002a; z-index: 2; letter-spacing: 0.5px; }
+        .p2-frame::before { color: #990033; }
+        .win-frame::before { color: #9e3d00; }
+        .profile-slot::after { content: '👤'; position: absolute; font-size: 18px; opacity: 0.35; z-index: 1; bottom: -2px; color: #80002a; }
+        
+        .is-loser { opacity: 0.4; filter: grayscale(30%); }
+        .crown-asset { position: absolute; top: -11px; font-size: 14px; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1)); z-index: 5; }
+
+        /* Typography Settings */
+        .player-label { font-size: 11px; font-weight: bold; color: #2c3e50; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; width: 100%; }
+        .p2-label { color: #34495e; }
+        .winner-label { color: #c0392b !important; }
+        .player-uid { font-size: 8px; color: #ff4d79; font-weight: bold; background: #fff0f3; padding: 1px 4px; border-radius: 3px; margin-top: 1px; border: 1px solid rgba(255, 128, 170, 0.15); font-family: monospace; }
+        
+        .pk-score { font-size: 8px; color: #ff4d79; margin-top: 2px; font-weight: bold; }
+        .winner-score { color: #e67e22; }
+
+        .pk-center { display: flex; flex-direction: column; align-items: center; }
+        .pk-text { font-size: 22px; font-weight: 900; background: linear-gradient(135deg, #ff4d79 0%, #e67e22 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-style: italic; filter: drop-shadow(0 1px 1px rgba(0,0,0,0.05)); }
+        .pk-timer { font-size: 8px; color: #e67e22; font-weight: bold; background: #fff9e6; padding: 1px 4px; border-radius: 3px; margin-top: 1px; border: 1px solid rgba(230,126,34,0.1); }
+
+        /* Compact Reward Rows (Tab 3) */
+        .reward-card { background: rgba(255, 242, 245, 0.9); border: 1px solid rgba(0,0,0,0.02); display: flex; align-items: center; justify-content: space-between; padding: 6px 10px; border-radius: 10px; margin-bottom: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.02); position: relative; }
+        .reward-card::after { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: #e67e22; }
+        .reward-left { display: flex; align-items: center; gap: 6px; }
+        .rank-tag { font-size: 8px; font-weight: bold; color: #fff; background: #e67e22; padding: 1px 4px; border-radius: 3px; min-width: 44px; text-align: center; }
+        
+        .reward-dp { width: 32px; height: 32px; border-radius: 6px; background: #ffd9e5; border: 1px solid #e67e22; display: flex; justify-content: center; align-items: center; position: relative; overflow: hidden; }
+        .reward-dp::before { content: 'AT'; font-size: 9px; font-weight: 900; color: #80002a; opacity: 0.9; z-index: 2; }
+        .reward-dp::after { content: '👤'; position: absolute; font-size: 12px; opacity: 0.3; z-index: 1; bottom: -1px; color: #80002a; }
+        
+        .reward-user-info { display: flex; flex-direction: column; }
+        .reward-username { font-size: 11px; font-weight: bold; color: #2c3e50; }
+        .reward-uid-label { font-size: 9px; color: #c0392b; font-weight: bold; }
+        .bonus-coins { font-size: 12px; font-weight: bold; color: #ff4d79; }
+
+        /* Compact Event Cards (Tab 4) */
+        .event-banner-card { background: rgba(255, 242, 245, 0.9); border: 1px dashed #ff80aa; border-radius: 12px; padding: 12px; text-align: center; margin-bottom: 8px; }
+        
+        /* 🚨 COMING SOON VALUE EXCLUSIVELY DEDICATED INSIDE EVENTS ONLY 🚨 */
+        .event-badge { background: #ff4d79; color: #fff; font-size: 8px; font-weight: bold; padding: 1px 6px; border-radius: 8px; text-transform: uppercase; display: inline-block; margin-bottom: 4px; }
+        .event-heading { font-size: 13px; font-weight: 800; color: #e67e22; margin-bottom: 2px; }
+        .event-desc { font-size: 10px; color: #34495e; line-height: 1.3; opacity: 0.9; }
+
+        @keyframes textDrift { 0% { transform: translate3d(0,0,0); } 100% { transform: translate3d(-100%,0,0); } }
+        @keyframes headerRotate { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+<div class="phone-container">
+
+    <!-- Header Block Area -->
+    <div class="app-header">
+        <div class="header-content">
+            <h1 class="app-title">AT LIVE PK LIST</h1>
+            <div class="live-clock-wrapper" id="live-clock-display">🗓 "Syncing Bangladesh Time...</div>
+        </div>
+    </div>
+
+    <!-- Message Ticker Banner Layer -->
+    <div class="ticker-container">
+        <div class="ticker-text">
+            এটি লাইভ (AT LIVE) অফিশিয়াল পরিবারে আপনাকে স্বাগতম! এখানে প্রতিদিন চলে সেরা কোয়ালিটির জমজমাট পিকে আড্ডা, লুডু টুর্নামেন্ট এবং অফিশিয়াল বোনাস কয়েন রিওয়ার্ডস!
+        </div>
+    </div>
+
+    <!-- Active Navigation Control Sheets Tabs -->
+    <div class="tab-menu">
+        <button class="tab-btn active" id="tab1-btn">📅 PK List</button>
+        <button class="tab-btn" id="tab2-btn">🏆 Winners</button>
+        <button class="tab-btn" id="tab3-btn">🎁 Bonus</button>
+        <button class="tab-btn" id="tab4-btn">🚀 Events</button>
+    </div>
+
+    <!-- ==================== TAB 1: LIVE SCHEDULE ==================== -->
+    <div id="live-schedule" class="content-section" style="display: block;">
+        <!-- Match 1 -->
+        <div class="pk-card">
+            <div class="card-meta"><span class="match-id">🆔 MATCH: #PK-701</span><span class="brand-watermark">AT LIVE</span></div>
+            <div class="pk-match-area">
+                <div class="player-wrapper"><div class="profile-slot"></div><span class="player-label">Princess_Anu</span><span class="player-uid">ID: 558932</span></div>
+                <div class="pk-center"><span class="pk-text">PK</span><span class="pk-timer">⏱️ 5 MINS</span></div>
+                <div class="player-wrapper"><div class="profile-slot p2-frame"></div><span class="player-label p2-label">Cute_Bella</span><span class="player-uid p2-uid">ID: 994231</span></div>
+            </div>
+        </div>
+        <!-- Match 2 -->
+        <div class="pk-card">
+            <div class="card-meta"><span class="match-id">🆔 MATCH: #PK-702</span><span class="brand-watermark">AT LIVE</span></div>
+            <div class="pk-match-area">
+                <div class="player-wrapper"><div class="profile-slot"></div><span class="player-label">Siam_99</span><span class="player-uid">ID: 445511</span></div>
+                <div class="pk-center"><span class="pk-text">PK</span><span class="pk-timer">⏱️ 10 MINS</span></div>
+                <div class="player-wrapper"><div class="profile-slot p2-frame"></div><span class="player-label p2-label">Miya_Bro</span><span class="player-uid p2-uid">ID: 882233</span></div>
+            </div>
+        </div>
+        <!-- Match 3 -->
+        <div class="pk-card">
+            <div class="card-meta"><span class="match-id">🆔 MATCH: #PK-703</span><span class="brand-watermark">AT LIVE</span></div>
+            <div class="pk-match-area">
+                <div class="player-wrapper"><div class="profile-slot"></div><span class="player-label">Riya_Sen</span><span class="player-uid">ID: 112233</span></div>
+                <div class="pk-center"><span class="pk-text">PK</span><span class="pk-timer">⏱️ 5 MINS</span></div>
+                <div class="player-wrapper"><div class="profile-slot p2-frame"></div><span class="player-label p2-label">Angel_Doll</span><span class="player-uid p2-uid">ID: 445566</span></div>
+            </div>
+        </div>
+        <!-- Match 4 -->
+        <div class="pk-card">
+            <div class="card-meta"><span class="match-id">🆔 MATCH: #PK-704</span><span class="brand-watermark">AT LIVE</span></div>
+            <div class="pk-match-area">
+                <div class="player-wrapper"><div class="profile-slot"></div><span class="player-label">Prince_St</span><span class="player-uid">ID: 778899</span></div>
+                <div class="pk-center"><span class="pk-text">PK</span><span class="pk-timer">⏱️ 15 MINS</span></div>
+                <div class="player-wrapper"><div class="profile-slot p2-frame"></div><span class="player-label p2-label">Queen_Gl</span><span class="player-uid p2-uid">ID: 110022</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== TAB 2: WINNERS ==================== -->
+    <div id="match-history" class="content-section" style="display: none;">
+        <!-- Result 1 -->
+        <div class="pk-card">
+            <div class="card-meta"><span class="match-id">🆔 MATCH: #PK-695</span><span class="brand-watermark">🎉 Ended</span></div>
+            <div class="pk-match-area">
+                <div class="player-wrapper"><span class="crown-asset">👑</span><div class="profile-slot win-frame"></div><span class="player-label winner-label">Angel_Riya</span><span class="player-uid">ID: 334455</span><span class="pk-score winner-score">🏆 Won: 4.5L</span></div>
+                <div class="pk-center"><span class="pk-text">PK</span><span class="pk-timer">⏱️ 15 MINS</span></div>
+                <div class="player-wrapper is-loser"><div class="profile-slot p2-frame"></div><span class="player-label p2-label">Miya_Khan</span><span class="player-uid p2-uid">ID: 778899</span><span class="pk-score" style="color:#7f8c8d;">Score: 1.2L</span></div>
+            </div>
+        </div>
+        <!-- Result 2 -->
+        <div class="pk-card">
+            <div class="card-meta"><span class="match-id">🆔 MATCH: #PK-696</span><span class="brand-watermark">🎉 Ended</span></div>
+            <div class="pk-match-area">
+                <div class="player-wrapper is-loser"><div class="profile-slot"></div><span class="player-label">Sumi_77</span><span class="player-uid">ID: 221155</span><span class="pk-score" style="color:#7f8c8d;">Score: 80K</span></div>
+                <div class="pk-center"><span class="pk-text">PK</span><span class="pk-timer">⏱️ 5 MINS</span></div>
+                <div class="player-wrapper"><span class="crown-asset">👑</span><div class="profile-slot win-frame"></div><span class="player-label winner-label">Cute_Nisha</span><span class="player-uid">ID: 449911</span><span class="pk-score winner-score">🏆 Won: 3.1L</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== TAB 3: WIN BONUS ==================== -->
+    <div id="win-bonus" class="content-section" style="display: none;">
+        <!-- Bonus 1 -->
+        <div class="reward-card">
+            <div class="reward-left"><div class="rank-tag">RANK 1</div><div class="reward-dp"></div><div class="reward-user-info"><span class="reward-username">Angel_Riya</span><span class="reward-uid-label">UID: 334455</span></div></div>
+            <div class="bonus-coins">+ 150,000 Pts</div>
+        </div>
+        <!-- Bonus 2 -->
+        <div class="reward-card">
+            <div class="reward-left"><div class="rank-tag">RANK 2</div><div class="reward-dp"></div><div class="reward-user-info"><span class="reward-username">Cute_Nisha</span><span class="reward-uid-label">UID: 449911</span></div></div>
+            <div class="bonus-coins">+ 100,000 Pts</div>
+        </div>
+    </div>
+
+    <!-- ==================== TAB 4: UPCOMING EVENTS ==================== -->
+    <div id="next-events-panel" class="content-section" style="display: none;">
+        <!-- Event 1 -->
+        <div class="event-banner-card">
+            <span class="event-badge">🌸 COMING SOON</span>
+            <div class="event-heading">AT LIVE Star War Tournament</div>
+            <div class="event-desc">The biggest official family matching and host battle series is coming soon! Keep supporting your favorite squads to boost your level rankings. Stay tuned for registration rooms!</div>
+        </div>
+    </div>
+
+</div>
+
+    <!-- Solid Unlocked Multi-Tab Control Routing Script -->
+    <script>
+        const btn1 = document.getElementById('tab1-btn');
+        const btn2 = document.getElementById('tab2-btn');
+        const btn3 = document.getElementById('tab3-btn');
+        const btn4 = document.getElementById('tab4-btn');
+
+        const sec1 = document.getElementById('live-schedule');
+        const sec2 = document.getElementById('match-history');
+        const sec3 = document.getElementById('win-bonus');
+        const sec4 = document.getElementById('next-events-panel');
+
+        btn1.addEventListener('click', function() { resetSheets(); sec1.style.display = "block"; btn1.classList.add('active'); });
+        btn2.addEventListener('click', function() { resetSheets(); sec2.style.display = "block"; btn2.classList.add('active'); });
+        btn3.addEventListener('click', function() { resetSheets(); sec3.style.display = "block"; btn3.classList.add('active'); });
+        btn4.addEventListener('click', function() { resetSheets(); sec4.style.display = "block"; btn4.classList.add('active'); });
+
+        function resetSheets() {
+            sec1.style.display = "none"; sec2.style.display = "none"; sec3.style.display = "none"; sec4.style.display = "none";
+            btn1.classList.remove('active'); btn2.classList.remove('active'); btn3.classList.remove('active'); btn4.classList.remove('active');
+        }
+
+        // 12-Hour Format Live Clock Linked to Bangladesh Timezone
+        function updateBangladeshTime() {
+            const now = new Date();
+            const options = { timeZone: 'Asia/Dhaka', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+            const dateOptions = { timeZone: 'Asia/Dhaka', day: '2-digit', month: 'short', year: 'numeric' };
+            
+            const timeString = now.toLocaleTimeString('en-US', options);
+            const dateString = now.toLocaleDateString('en-US', dateOptions);
+            
+            document.getElementById('live-clock-display').innerText = `🗓️ ${dateString} | ⏱️ ${timeString}`;
+        }
+        
+            setInterval(updateBangladeshTime, 1000);
+            updateBangladeshTime();
+    </script>
+</body>
+</html>
